@@ -1,3 +1,5 @@
+import Counter from "./pages/Counter";
+
 export default function App() {
-    return App;
+    return <Counter />;
 }
