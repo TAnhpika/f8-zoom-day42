@@ -1,4 +1,4 @@
-import { useFetchProductList, useProductList } from "@/features/product/hooks";
+import { useFetchProductList, useProductList } from "@/features/product";
 
 export default function ProductList() {
     useFetchProductList();

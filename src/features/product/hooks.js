@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getList as getProductList } from "@/services/product/productService";
-import { selectList as selectProductList } from "@/features/product/selectors";
+import { getList as getProductList } from "@/services/product";
+import { selectList as selectProductList } from "@/features/product";
 
 export const useFetchProductList = () => {
     const dispatch = useDispatch();
