@@ -2,12 +2,9 @@ import {
     decrement,
     increment,
     incrementByAmount,
-    selectCount,
 } from "@/features/counter/counterSlice";
+import { selectCount } from "@/features/counter/selectors";
 import { useDispatch, useSelector } from "react-redux";
-
-console.log(incrementByAmount(5));
-
 
 export default function Counter() {
     const count = useSelector(selectCount);

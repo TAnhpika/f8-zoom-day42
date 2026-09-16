@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import counterReducer, { reducerPath as counter} from "@/features/counter/counterSlice";
+import productSlice from "@/features/product/productSlice";
+import counterSlice from "@/features/counter/counterSlice";
 
 const store = configureStore({
     reducer: {
-        [counter]: counterReducer,
+        [counterSlice.reducerPath]: counterSlice.reducer,
+        [productSlice.reducerPath]: productSlice.reducer,
     },
 });
 

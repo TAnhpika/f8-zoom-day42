@@ -1,5 +1,5 @@
-import Counter from "./pages/Counter";
+import AppRoutes from "./components/AppRoutes";
 
 export default function App() {
-    return <Counter />;
+    return <AppRoutes />;
 }
