@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     list: [],
+    loading: false,
 };
 
 export const productSlice = createSlice({
@@ -14,9 +15,17 @@ export const productSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(getList.fulfilled, (state, action) => {
-            state.list = action.payload.items;
-        });
+        builder
+            .addCase(getList.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getList.fulfilled, (state, action) => {
+                state.list = action.payload.items;
+                state.loading = false;
+            })
+            .addCase(getList.rejected, (state) => {
+                state.loading = false;
+            });
     },
 });
 
