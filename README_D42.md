@@ -82,3 +82,11 @@ Action type tự viết nên reducer k tự switch case đc -> cần tạo extra
 * import dài (đb khi dùng nhiều nơi), k gợi ý
 
 => Tạo file index: đối vs icon, ảnh dùng nhiều nơi, còn dùng 1 lần thì dùng trực tiếp
+
+# Font awesome
+
+- @fortawesome/react-fontawesome: giúp dễ dùng fontawesome trong react bằng cách tạo ra component. component đó có thể nhận các biến (@fortawesome/free-brands-svg-icons) để lấy ra core để hiển thị
+
+- trong thẻ svg có path gồm thuộc tính:
++ d: đc vẽ từ công thức toán học (vector)
++ fill: để set màu. mặc định là currentColor: giống màu vs thẻ cha. Chiều cao = 1 em = độ cao cha

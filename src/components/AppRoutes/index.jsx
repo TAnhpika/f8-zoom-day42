@@ -2,6 +2,7 @@ import { HashRouter, Route, Routes } from "react-router";
 import Counter from "@/pages/Counter";
 import ProductList from "@/pages/ProductList";
 import DemoAssets from "@/pages/DemoAssets";
+import Icons from "@/pages/Icons";
 
 export default function AppRoutes() {
     return (
@@ -10,6 +11,7 @@ export default function AppRoutes() {
                 <Route path="/" element={<Counter />} />
                 <Route path="/products" element={<ProductList />} />
                 <Route path="/assets" element={<DemoAssets />} />
+                <Route path="/icons" element={<Icons />} />
             </Routes>
         </HashRouter>
     );
