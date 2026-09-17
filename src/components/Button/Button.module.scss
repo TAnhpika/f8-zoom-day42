@@ -1,4 +1,5 @@
 .wrapper {
+    position: relative;
     display: inline-flex;
     gap: 8px;
     align-items: center;
@@ -11,6 +12,17 @@
     }
 }
 
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+.inner {
+    &.hidden {
+        visibility: hidden;
+    }
+}
 .primary {
     color: #fff;
     background: #a81010;
@@ -23,6 +35,11 @@
 .bordered {
     color: #a81010;
     border: 2px solid currentColor;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 // Sizes
