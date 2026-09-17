@@ -62,4 +62,23 @@
 
 Action type tự viết nên reducer k tự switch case đc -> cần tạo extraReducer vs hàm addCase(fetchByIdStatus.fulfilled, func...) - bắt lúc API hoàn thành thì thực hiện hàm ...
 
+---
 
+# Làm việc vs file tĩnh
+
+1. Bỏ trong public
+
+- có thể truy cập trực tiếp /img/Sc1.png
+- nhược điểm: hardcode đường dẫn
+- ưu: giữ nguyên tên ảnh khi open img in new tab. Vì khi build production thì folder trong public sẽ nằm thẳng ở dist
+
+2. Đưa vào asset trong src
+
+- đặt tên thư mục rõ ràng (images chứ k img)
+- ưu: dùng bằng biến nên k hardcode
+- nhược:
+
+* khi build production: tên img thay đổi & đường dẫn đổi (k còn là /src/assets/images/av.jpg mà là /assets/av-random.jpg) -> cần đặt và dùng biến
+* import dài (đb khi dùng nhiều nơi), k gợi ý
+
+=> Tạo file index: đối vs icon, ảnh dùng nhiều nơi, còn dùng 1 lần thì dùng trực tiếp
