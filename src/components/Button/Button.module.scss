@@ -1,0 +1,39 @@
+.wrapper {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: pink;
+    &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+    }
+}
+
+.primary {
+    color: #fff;
+    background: #a81010;
+}
+
+.rounded {
+    border-radius: 999px;
+}
+
+.bordered {
+    color: #a81010;
+    border: 2px solid currentColor;
+}
+
+// Sizes
+.small {
+    padding: 2px 12px;
+    font-size: 1.4rem;
+}
+.medium {
+    padding: 4px 16px;
+}
+.large {
+    padding: 6px 20px;
+    font-size: 1.8rem;
+}

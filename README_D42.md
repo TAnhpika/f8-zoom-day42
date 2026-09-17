@@ -88,5 +88,12 @@ Action type tự viết nên reducer k tự switch case đc -> cần tạo extra
 - @fortawesome/react-fontawesome: giúp dễ dùng fontawesome trong react bằng cách tạo ra component. component đó có thể nhận các biến (@fortawesome/free-brands-svg-icons) để lấy ra core để hiển thị
 
 - trong thẻ svg có path gồm thuộc tính:
-+ d: đc vẽ từ công thức toán học (vector)
-+ fill: để set màu. mặc định là currentColor: giống màu vs thẻ cha. Chiều cao = 1 em = độ cao cha
+
+* d: đc vẽ từ công thức toán học (vector)
+* fill: để set màu. mặc định là currentColor: giống màu vs thẻ cha. Chiều cao = 1 em = độ cao cha
+
+# Custom button with icon
+
+- đặt tham số mặc định là 1 tham số khác (icon,
+  leftIcon = icon,)
+- giúp mặc định truyền icon là leftIcon, còn nếu gọi leftIcon vẫn đúng
