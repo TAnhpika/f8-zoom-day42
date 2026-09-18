@@ -14,6 +14,7 @@ export const addressApi = createApi({
             query: (id) => `/address/provinces/${id}`,
         }),
     }),
+    refetchOnFocus: true
 });
 
 export const { useGetProvincesQuery , useGetProvinceByIdQuery} = addressApi;
