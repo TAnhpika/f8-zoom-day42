@@ -84,6 +84,7 @@ Button.propTypes = {
     href: PropTypes.string,
     size: PropTypes.string,
     className: PropTypes.string,
+    icon: PropTypes.object,
     leftIcon: PropTypes.object,
     rightIcon: PropTypes.object,
     onClick: PropTypes.func,
