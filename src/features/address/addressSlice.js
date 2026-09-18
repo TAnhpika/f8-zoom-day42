@@ -8,13 +8,13 @@ export const addressApi = createApi({
     endpoints: (build) => ({
         getProvinces: build.query({
             query: () => `/address/provinces`,
+            keepUnusedDataFor: 10,
         }),
-        
+
         getProvinceById: build.query({
             query: (id) => `/address/provinces/${id}`,
         }),
     }),
-    refetchOnFocus: true
 });
 
-export const { useGetProvincesQuery , useGetProvinceByIdQuery} = addressApi;
+export const { useGetProvincesQuery, useGetProvinceByIdQuery } = addressApi;

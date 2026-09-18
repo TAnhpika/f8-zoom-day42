@@ -4,6 +4,7 @@ import ProductList from "@/pages/ProductList";
 import DemoAssets from "@/pages/DemoAssets";
 import Icons from "@/pages/Icons";
 import ProvincesList from "@/pages/Address/ProvincesList";
+import ProvincesList2 from "@/pages/Address/ProvincesList2";
 
 export default function AppRoutes() {
     return (
@@ -12,6 +13,7 @@ export default function AppRoutes() {
                 <Route path="/" element={<Counter />} />
                 <Route path="/products" element={<ProductList />} />
                 <Route path="/address/provinces" element={<ProvincesList />} />
+                <Route path="/address/provinces2" element={<ProvincesList2 />} />
                 
                 <Route path="/assets" element={<DemoAssets />} />
                 <Route path="/icons" element={<Icons />} />

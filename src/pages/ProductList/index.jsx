@@ -3,6 +3,7 @@ import {
     useProductLoading,
     useProductList,
 } from "@/features/product";
+import { Link } from "react-router";
 
 export default function ProductList() {
     useFetchProductList();
@@ -12,6 +13,8 @@ export default function ProductList() {
     return (
         <>
             <h1>Product List</h1>
+            <Link to="/address/provinces">List 1</Link>
+
             {loading ? (
                 <div>Loading...</div>
             ) : (
