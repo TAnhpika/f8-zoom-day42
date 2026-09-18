@@ -14,7 +14,7 @@ export default function ProvincesList() {
                     <div>Loading...</div>
                 ) : (
                     <ul>
-                        {data?.data.map((province) => (
+                        {data?.map((province) => (
                             <li key={province.province_id}>{province.name}</li>
                         ))}
                     </ul>

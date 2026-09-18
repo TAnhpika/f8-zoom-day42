@@ -9,12 +9,17 @@ export const addressApi = createApi({
         getProvinces: build.query({
             query: () => `/address/provinces`,
             keepUnusedDataFor: 10,
+            transformResponse: (response) => {
+                return response.data;
+            },
         }),
 
         getProvinceById: build.query({
             query: (id) => `/address/provinces/${id}`,
         }),
     }),
+    // refetchOnFocus: true
+    refetchOnReconnect: true,
 });
 
 export const { useGetProvincesQuery, useGetProvinceByIdQuery } = addressApi;
