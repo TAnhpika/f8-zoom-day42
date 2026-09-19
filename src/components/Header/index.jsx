@@ -2,10 +2,7 @@ import { useGetCurrentUserQuery } from "@/features/auth/authSlice";
 
 export default function Header() {
     const { data, isLoading } = useGetCurrentUserQuery();
-    if (isLoading) return null;
 
-    console.log(data);
-    
     return (
         <div>
             <h1>Header</h1>

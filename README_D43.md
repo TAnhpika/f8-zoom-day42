@@ -37,3 +37,25 @@
 
 * bị lặp baseUrl
 * khi cần đính header chung, vd: đính token. -> cần cấu hình nhiều nơi => cần tạo ra base ~ instance của axios
+
+# Redux persist
+
+- npm i redux-persist
+
+## Lý do dùng
+
+- data user cần lấy để hiện thị ở nhiều nơi nhưng khi refresh thì bị refetch -> cần cache lại
+- nên dùng vs createAsyncThunk
+
+## Đặc điểm
+
+- chọn dữ liệu sau khi store dispatch, tạo ra state mới sẽ tự động lưu (có hỗ trợ mã hóa)
+- giúp lưu dữ liệu redux từ store vào local storage. Khi refresh thì lấy data từ local storage nạp vào store lại 
+=> có thể lưu dữ liệu (token) vào global state
+
+- Bình thường khi F5 sẽ xóa toàn bộ state và khởi tạo lại từ đầu với initState
+- Khi có persist: nạp data từ local storage -> nhanh, k nhấp nháy khi refresh
+
+- cần thì mới dùng (lưu setting, theme...)
+
+- nhược điểm: persist giữ lại trạng thái, rtk query thấy có trạng thái r nên k tải lại -> loading ở mãi true và k hiện data đc => Nên dùng với createAsyncThunk
