@@ -26,3 +26,14 @@
 - tự tạo reducer, action
 - khi import createApi từ @reduxjs/toolkit/query/react sẽ hỗ trợ từ sinh hook useGetProvincesQuery... (trả kèm trạng thái Api: pending, fulfilled,..)
 - tự quy ước reducerPath: nếu dùng RTK query thì tên kết thúc bằng Api (addressApi)
+
+- keepUnusedDataFor: mặc định là 60s
+
+# Authentication
+
+- Data current user cần dùng ở mọi nơi -> cần fetch ở App
+
+- createApi:
+
+* bị lặp baseUrl
+* khi cần đính header chung, vd: đính token. -> cần cấu hình nhiều nơi => cần tạo ra base ~ instance của axios
