@@ -7,6 +7,8 @@ import ProvincesList from "@/pages/Address/ProvincesList";
 import ProvincesList2 from "@/pages/Address/ProvincesList2";
 import Header from "../Header";
 import AuthProvider from "../AuthProvider";
+import Register from "@/pages/Auth/Register";
+import Login from "@/pages/Auth/Login";
 
 export default function AppRoutes() {
     return (
@@ -24,6 +26,9 @@ export default function AppRoutes() {
 
                 <Route path="/assets" element={<DemoAssets />} />
                 <Route path="/icons" element={<Icons />} />
+
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </HashRouter>
     );

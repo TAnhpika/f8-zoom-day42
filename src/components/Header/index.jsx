@@ -1,16 +1,17 @@
 import { useCurrentUser } from "@/features/auth/hooks";
+import { Link } from "react-router";
 
 export default function Header() {
-    const currentUser = useCurrentUser()
+    const currentUser = useCurrentUser();
     return (
         <div>
-            <h1>Header</h1>
             {currentUser ? (
                 <p>{currentUser.email}</p>
             ) : (
                 <div>
-                    <button>Sign in</button>
-                    <button>Sign up</button>
+                    <Link to="/login">Sign in</Link>
+                    <br />
+                    <Link to="/register">Sign up</Link>
                 </div>
             )}
         </div>

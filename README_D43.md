@@ -70,9 +70,24 @@
 
 - đếm hạn cookie, r xóa token 1 cách thủ cách đều k phải cách chuẩn
 - cách chuẩn nhất là gọi lại API và trả về lỗi -> set lại
+- khi đăng xuất: localStorage.clear()
 
 ## Refresh token:
 
 - khi rơi vào 401 (hết hạn) thay vì đăng xuất thì gọi API để refresh token để nhận về token mới -> gọi lại API bị lỗi -> UI vẫn hiện thông tin người dùng
   => giúp người dùng bth k bị đăng xuất
 - k để access token lâu vì giảm bảo mật (lộ, dùng tool,...). Khi hạn token càng lâu thì người lấy đc càng khai thác đc lâu
+
+# Private route
+
+- Phải đăng nhập ms vào đc
+- Phân quyền là của BE. FE dùng để check quyền có làm đc k để ẩn hiện
+
+## Redux hook form vs formik
+
+- formik dùng context api
+- Redux hook form dùng custom hook -> performance tối ưu hơn
+
+## Redux hook form
+
+- npm i react-hook-form
