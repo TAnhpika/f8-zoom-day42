@@ -4,6 +4,14 @@ export const httpClient = axios.create({
     baseURL: import.meta.env.VITE_BASE_API,
 });
 
+httpClient.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+        config.headers.set("Authorization", `Bearer ${token}`);
+    }
+    return config;
+});
+
 const _send = async (method, path, data, config) => {
     const response = await httpClient.request({
         ...config,

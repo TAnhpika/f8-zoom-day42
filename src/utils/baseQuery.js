@@ -7,8 +7,6 @@ const baseQuery = fetchBaseQuery({
         if (token) {
             headers.set("Authorization", `Bearer ${token}`);
         }
-        headers.set("pika", 123);
-
         return headers;
     },
 });

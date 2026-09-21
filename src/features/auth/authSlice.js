@@ -1,17 +1,26 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import baseQuery from "@/store/baseQuery";
+import { getCurrentUser } from "@/services/auth";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const authApi = createApi({
-    reducerPath: "authApi",
-    baseQuery,
-    endpoints: (build) => ({
-        getCurrentUser: build.query({
-            query: () => `/auth/me`,
-            transformResponse: (response) => {
-                return response.data;
-            },
-        }),
-    }),
+const initialState = {
+    currentUser: null,
+};
+
+export const authSlice = createSlice({
+    name: "auth",
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(getCurrentUser.fulfilled, (state, action) => {
+            state.currentUser = action.payload;
+        });
+        builder.addCase(getCurrentUser.rejected, (state) => {
+            state.currentUser = null;
+        });
+    },
 });
 
-export const { useGetCurrentUserQuery } = authApi;
+export const { setList } = authSlice.actions;
+
+export const { reducerPath } = authSlice;
+
+export default authSlice;

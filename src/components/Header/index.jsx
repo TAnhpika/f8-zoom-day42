@@ -1,13 +1,12 @@
-import { useGetCurrentUserQuery } from "@/features/auth/authSlice";
+import { useCurrentUser } from "@/features/auth/hooks";
 
 export default function Header() {
-    const { data, isLoading } = useGetCurrentUserQuery();
-
+    const currentUser = useCurrentUser()
     return (
         <div>
             <h1>Header</h1>
-            {isLoading ? null : data ? (
-                <p>{data.email}</p>
+            {currentUser ? (
+                <p>{currentUser.email}</p>
             ) : (
                 <div>
                     <button>Sign in</button>

@@ -7,13 +7,13 @@ import storageModule from "redux-persist/lib/storage";
 import { counterSlice } from "@/features/counter";
 import { productSlice } from "@/features/product";
 import { addressApi } from "@/features/address/addressSlice";
-import { authApi } from "@/features/auth/authSlice";
+import { authSlice } from "@/features/auth/authSlice";
 
 const rootReducer = combineReducers({
+    [authSlice.reducerPath]: authSlice.reducer,
     [counterSlice.reducerPath]: counterSlice.reducer,
     [productSlice.reducerPath]: productSlice.reducer,
     [addressApi.reducerPath]: addressApi.reducer,
-    [authApi.reducerPath]: authApi.reducer,
 });
 
 const storage = storageModule.default ?? storageModule;
@@ -30,7 +30,6 @@ const store = configureStore({
             serializableCheck: false,
         }),
         addressApi.middleware,
-        authApi.middleware,
     ],
 });
 

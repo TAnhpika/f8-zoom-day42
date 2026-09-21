@@ -1,6 +1,6 @@
-import { useGetCurrentUserQuery } from "@/features/auth/authSlice";
+import { useFetchCurrentUser } from "@/features/auth/hooks";
 
 export default function AuthProvider() {
-    useGetCurrentUserQuery();
+    useFetchCurrentUser();
     return null;
 }

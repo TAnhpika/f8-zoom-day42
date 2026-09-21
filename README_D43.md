@@ -50,8 +50,8 @@
 ## Đặc điểm
 
 - chọn dữ liệu sau khi store dispatch, tạo ra state mới sẽ tự động lưu (có hỗ trợ mã hóa)
-- giúp lưu dữ liệu redux từ store vào local storage. Khi refresh thì lấy data từ local storage nạp vào store lại 
-=> có thể lưu dữ liệu (token) vào global state
+- giúp lưu dữ liệu redux từ store vào local storage. Khi refresh thì lấy data từ local storage nạp vào store lại
+  => có thể lưu dữ liệu (token) vào global state
 
 - Bình thường khi F5 sẽ xóa toàn bộ state và khởi tạo lại từ đầu với initState
 - Khi có persist: nạp data từ local storage -> nhanh, k nhấp nháy khi refresh
@@ -59,3 +59,20 @@
 - cần thì mới dùng (lưu setting, theme...)
 
 - nhược điểm: persist giữ lại trạng thái, rtk query thấy có trạng thái r nên k tải lại -> loading ở mãi true và k hiện data đc => Nên dùng với createAsyncThunk
+
+## Persist + createAsyncThunk
+
+- Khi cần đính token và header của axios = axios interceptor: xử lý trc khi request đc gửi đi / trc khi dữ liệu đó đc trả về
+  => Cache data ở UI + fetch API lại
+  => Giúp khi hết phiên đăng nhập -> báo lỗi -> gỡ token để k persist nữa
+
+## Xử lý token
+
+- đếm hạn cookie, r xóa token 1 cách thủ cách đều k phải cách chuẩn
+- cách chuẩn nhất là gọi lại API và trả về lỗi -> set lại
+
+## Refresh token:
+
+- khi rơi vào 401 (hết hạn) thay vì đăng xuất thì gọi API để refresh token để nhận về token mới -> gọi lại API bị lỗi -> UI vẫn hiện thông tin người dùng
+  => giúp người dùng bth k bị đăng xuất
+- k để access token lâu vì giảm bảo mật (lộ, dùng tool,...). Khi hạn token càng lâu thì người lấy đc càng khai thác đc lâu
