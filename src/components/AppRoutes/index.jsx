@@ -9,6 +9,7 @@ import Header from "../Header";
 import AuthProvider from "../AuthProvider";
 import Register from "@/pages/Auth/Register";
 import Login from "@/pages/Auth/Login";
+import Home from "@/pages/Home";
 
 export default function AppRoutes() {
     return (
@@ -16,7 +17,8 @@ export default function AppRoutes() {
             <AuthProvider />
             <Header />
             <Routes>
-                <Route path="/" element={<Counter />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/counter" element={<Counter />} />
                 <Route path="/products" element={<ProductList />} />
                 <Route path="/address/provinces" element={<ProvincesList />} />
                 <Route

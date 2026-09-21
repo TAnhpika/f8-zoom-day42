@@ -1,22 +1,30 @@
 import { useForm } from "react-hook-form";
+import * as authService from "@/services/auth";
+import { useNavigate } from "react-router";
 
 export default function Register() {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({
         defaultValues: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            password_confirmation: "",
+            firstName: "Tuan",
+            lastName: "Anh",
+            email: "anhpika123456@gmail.com",
+            password: "123123123",
+            password_confirmation: "123123123",
         },
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        try {
+            await authService.register(data);
+            navigate("/login");
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     return (

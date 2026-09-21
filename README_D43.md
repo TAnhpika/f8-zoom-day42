@@ -91,3 +91,8 @@
 ## Redux hook form
 
 - npm i react-hook-form
+
+## Luồng login
+
+- register -> login -> Home -> logout
+

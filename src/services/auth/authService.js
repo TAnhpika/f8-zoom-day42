@@ -8,3 +8,13 @@ export const getCurrentUser = createAsyncThunk(
         return response.data;
     },
 );
+
+export const register = async (data) => {
+    const response = await http.post("/auth/register", data);
+    return response.data;
+};
+
+export const login = async (data) => {
+    const response = await http.post("/auth/login", data);
+    return response.data;
+};
