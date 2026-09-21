@@ -93,6 +93,22 @@
 
 - register -> login -> Home -> logout
 
-### logout 
+### logout
+
 - nếu chỉ xóa token ở local, nếu đã lộ thì token vẫn còn hạn thì vẫn còn khai thác đc
-- gọi api để revoke token: gọi API bằng token đang đăng nhập thì token đó dùng đc nữa. Sau đó ms xóa ở local storage
+- gọi api để revoke token: gọi API bằng token đang đăng nhập thì token đó dùng đc nữa. Sau đó ms xóa ở local storage và global state
+
+# Private route
+
+- Phải đăng nhập ms vào đc
+- Phân quyền là của BE. FE dùng để check quyền có làm đc k để ẩn hiện
+
+Navigate:
+
+- useNavigate chỉ dùng đc trong useEffect => dùng <Navigate to={}> giúp chuyển hướng trong khi render
+
+Location:
+- dùng useLocation mang theo pathname
+- dùng encodeURIComponent vì pathname có '/'
+- dùng useSearchParams ở trang login
+=> Nhớ private route user muốn vào. Nav qua Login. Nếu login thành công sẽ vào trang user muốn vào chứ k nav default về trang chủ (Vd: profile -> tự nav qua login -> Ok? -> nav về profile)

@@ -12,11 +12,14 @@ export default function Header() {
     const handleLogout = async () => {
         try {
             await authService.logout();
-            localStorage.clear();
-            dispatch(setCurrentUser(null));
-            navigate("/login");
         } catch (error) {
             console.log(error);
+        } finally {
+            // dù hết session login token thì vẫn xử lý và nav về
+            localStorage.clear();
+            dispatch(setCurrentUser(null));
+
+            navigate("/login");
         }
     };
 

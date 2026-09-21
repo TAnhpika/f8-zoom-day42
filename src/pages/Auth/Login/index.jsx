@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { useForm } from "react-hook-form";
 
 import * as authService from "@/services/auth";
@@ -10,6 +10,7 @@ export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const currentUser = useCurrentUser();
+    const [params] = useSearchParams();
 
     const {
         register,
@@ -22,17 +23,18 @@ export default function Login() {
         },
     });
 
-    // có user nav về home
     useEffect(() => {
-        if (currentUser) navigate("/");
-    }, [currentUser, navigate]);
+        if (currentUser) {
+            const continuePath = params.get("continue") || "/";
+            navigate(continuePath);
+        }
+    }, [currentUser, navigate, params]);
 
     const onSubmit = async (data) => {
         const { access_token } = await authService.login(data);
         if (access_token) {
             localStorage.setItem("token", access_token);
-            dispatch(authService.getCurrentUser())
-            navigate("/")
+            dispatch(authService.getCurrentUser());
         }
     };
 

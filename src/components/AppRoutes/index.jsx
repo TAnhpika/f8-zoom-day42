@@ -10,6 +10,8 @@ import AuthProvider from "../AuthProvider";
 import Register from "@/pages/Auth/Register";
 import Login from "@/pages/Auth/Login";
 import Home from "@/pages/Home";
+import Profile from "@/pages/Profile";
+import PrivateRoute from "../PrivateRoute";
 
 export default function AppRoutes() {
     return (
@@ -31,6 +33,10 @@ export default function AppRoutes() {
 
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
+
+                <Route element={<PrivateRoute />}>
+                    <Route path="/profile" element={<Profile />} />
+                </Route>
             </Routes>
         </HashRouter>
     );
