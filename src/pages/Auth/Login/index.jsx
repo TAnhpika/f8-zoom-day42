@@ -22,6 +22,7 @@ export default function Login() {
         },
     });
 
+    // có user nav về home
     useEffect(() => {
         if (currentUser) navigate("/");
     }, [currentUser, navigate]);

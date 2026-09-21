@@ -78,10 +78,7 @@
   => giúp người dùng bth k bị đăng xuất
 - k để access token lâu vì giảm bảo mật (lộ, dùng tool,...). Khi hạn token càng lâu thì người lấy đc càng khai thác đc lâu
 
-# Private route
-
-- Phải đăng nhập ms vào đc
-- Phân quyền là của BE. FE dùng để check quyền có làm đc k để ẩn hiện
+# Làm việc vs form: login, logout
 
 ## Redux hook form vs formik
 
@@ -96,3 +93,6 @@
 
 - register -> login -> Home -> logout
 
+### logout 
+- nếu chỉ xóa token ở local, nếu đã lộ thì token vẫn còn hạn thì vẫn còn khai thác đc
+- gọi api để revoke token: gọi API bằng token đang đăng nhập thì token đó dùng đc nữa. Sau đó ms xóa ở local storage

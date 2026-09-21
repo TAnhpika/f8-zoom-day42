@@ -8,7 +8,11 @@ const initialState = {
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+        setCurrentUser(state, action) {
+            state.currentUser = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(getCurrentUser.fulfilled, (state, action) => {
             state.currentUser = action.payload;
@@ -19,7 +23,7 @@ export const authSlice = createSlice({
     },
 });
 
-export const { setList } = authSlice.actions;
+export const { setCurrentUser } = authSlice.actions;
 
 export const { reducerPath } = authSlice;
 

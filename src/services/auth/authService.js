@@ -18,3 +18,8 @@ export const login = async (data) => {
     const response = await http.post("/auth/login", data);
     return response.data;
 };
+
+export const logout = async () => {
+    const response = await http.post("/auth/logout");
+    return response.data;
+};
