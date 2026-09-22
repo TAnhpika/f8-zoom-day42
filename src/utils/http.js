@@ -5,12 +5,74 @@ export const httpClient = axios.create({
 });
 
 httpClient.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-        config.headers.set("Authorization", `Bearer ${token}`);
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+        config.headers.set("Authorization", `Bearer ${accessToken}`);
     }
     return config;
 });
+
+let isRefreshing = false;
+let failedQueue = [];
+
+const processQueue = (error) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve();
+    }
+  });
+
+  failedQueue = [];
+};
+
+const refreshToken = async () => {
+  try {
+    await post("/auth/refresh");
+    processQueue(null);
+  } catch (error) {
+    processQueue(error);
+    throw error;
+  }
+};
+
+const getNewToken = async () => {
+  if (!isRefreshing) {
+    isRefreshing = true;
+    await refreshToken();
+    isRefreshing = false;
+    return;
+  }
+
+  // Return a promise that resolves with the new token
+  return new Promise((resolve, reject) => {
+    failedQueue.push({ resolve, reject });
+  });
+};
+
+// Handle refresh token
+httpRequest.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    const shouldRenewToken =
+      error.response.status == 401 &&
+      !originalRequest._retry;
+
+    if (shouldRenewToken) {
+      originalRequest._retry = true;
+      try {
+        await getNewToken();
+        return httpRequest(originalRequest);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 const _send = async (method, path, data, config) => {
     const response = await httpClient.request({
