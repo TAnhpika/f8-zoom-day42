@@ -12,8 +12,14 @@ import Login from "@/pages/Auth/Login";
 import Home from "@/pages/Home";
 import Profile from "@/pages/Profile";
 import PrivateRoute from "../PrivateRoute";
+import { useEffect } from "react";
+import { httpClient } from "@/utils/http";
 
 export default function AppRoutes() {
+    useEffect(() => {
+        httpClient.get("/auth/devices");
+    }, []);
+    
     return (
         <HashRouter>
             <AuthProvider />

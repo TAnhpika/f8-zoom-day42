@@ -31,11 +31,10 @@ export default function Login() {
     }, [currentUser, navigate, params]);
 
     const onSubmit = async (data) => {
-        const { access_token } = await authService.login(data);
-        if (access_token) {
-            localStorage.setItem("token", access_token);
-            dispatch(authService.getCurrentUser());
-        }
+        const { access_token, refresh_token } = await authService.login(data);
+        localStorage.setItem("accessToken", access_token);
+        localStorage.setItem("refreshToken", refresh_token);
+        dispatch(authService.getCurrentUser());
     };
 
     return (
