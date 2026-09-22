@@ -1,21 +1,28 @@
 import { useForm } from "react-hook-form";
 import * as authService from "@/services/auth";
 import { useNavigate } from "react-router";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "@/utils/validators";
+import { useEffect } from "react";
 
 export default function Register() {
     const navigate = useNavigate();
     const {
         register,
+        trigger,
+        watch,
+        setError,
         handleSubmit,
         formState: { errors },
     } = useForm({
         defaultValues: {
-            firstName: "Tuan",
-            lastName: "Anh",
-            email: "anhpika123456@gmail.com",
-            password: "123123123",
-            password_confirmation: "123123123",
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            password_confirmation: "",
         },
+        resolver: yupResolver(registerSchema),
     });
 
     const onSubmit = async (data) => {
@@ -27,51 +34,54 @@ export default function Register() {
         }
     };
 
+    // Synchro checking password
+    const password = watch("password");
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/incompatible-library
+        const confirmation = watch("password_confirmation");
+        if (confirmation && password !== confirmation) {
+            trigger("password_confirmation");
+        } else {
+            setError("password_confirmation", null);
+        }
+    }, [password, setError, trigger, watch]);
+
     return (
         <div>
             <h1>Register</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input
                     type="text"
-                    {...register("firstName", {
-                        required: "Vui lòng nhập trường này",
-                    })}
+                    {...register("firstName")}
                     placeholder="Enter first name..."
                 />
                 {errors.firstName && <p>{errors.firstName.message}</p>}
                 <br />
                 <input
                     type="text"
-                    {...register("lastName", {
-                        required: "Vui lòng nhập trường này",
-                    })}
+                    {...register("lastName")}
                     placeholder="Enter last name..."
                 />
                 {errors.lastName && <p>{errors.lastName.message}</p>}
                 <br />
                 <input
                     type="email"
-                    {...register("email", {
-                        required: "Vui lòng nhập trường này",
-                    })}
+                    {...register("email")}
                     placeholder="Enter email..."
                 />
                 {errors.email && <p>{errors.email.message}</p>}
                 <br />
                 <input
                     type="password"
-                    {...register("password", {
-                        required: "Vui lòng nhập trường này",
-                    })}
+                    {...register("password")}
                     placeholder="Enter password..."
                 />
                 {errors.password && <p>{errors.password.message}</p>}
                 <br />
                 <input
                     type="password"
-                    {...register("password_confirmation", {
-                        required: "Vui lòng nhập trường này",
-                    })}
+                    {...register("password_confirmation")}
                     placeholder="Confirm password..."
                 />
                 {errors.password_confirmation && (
