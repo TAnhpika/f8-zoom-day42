@@ -1,31 +1,38 @@
+import { lazy, useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router";
-import Counter from "@/pages/Counter";
-import ProductList from "@/pages/ProductList";
-import DemoAssets from "@/pages/DemoAssets";
-import Icons from "@/pages/Icons";
-import ProvincesList from "@/pages/Address/ProvincesList";
-import ProvincesList2 from "@/pages/Address/ProvincesList2";
-import Header from "../Header";
-import AuthProvider from "../AuthProvider";
-import Register from "@/pages/Auth/Register";
-import Login from "@/pages/Auth/Login";
+
+// K lazy load
 import Home from "@/pages/Home";
 import Profile from "@/pages/Profile";
-import PrivateRoute from "../PrivateRoute";
-import { useEffect } from "react";
+
+// pages lazy load
+const Counter = lazy(() => import("@/pages/Counter"));
+const ProductList = lazy(() => import("@/pages/ProductList"));
+const DemoAssets = lazy(() => import("@/pages/DemoAssets"));
+const Icons = lazy(() => import("@/pages/Icons"));
+const ProvincesList = lazy(() => import("@/pages/Address/ProvincesList"));
+const ProvincesList2 = lazy(() => import("@/pages/Address/ProvincesList2"));
+const Register = lazy(() => import("@/pages/Auth/Register"));
+const Login = lazy(() => import("@/pages/Auth/Login"));
+
+// Components
+import Header from "@/components/Header";
+import AuthProvider from "@/components/AuthProvider";
+import PrivateRoute from "@/components/PrivateRoute";
+
 import { httpClient } from "@/utils/http";
 
 export default function AppRoutes() {
     useEffect(() => {
         httpClient.get("/auth/devices");
     }, []);
-    
+
     return (
         <HashRouter>
             <AuthProvider />
             <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route index element={<Home />} />
                 <Route path="/counter" element={<Counter />} />
                 <Route path="/products" element={<ProductList />} />
                 <Route path="/address/provinces" element={<ProvincesList />} />

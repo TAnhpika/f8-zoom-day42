@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Counter() {
     const count = useSelector(selectCount);
     const dispatch = useDispatch();
-
-    test();
     
     return (
         <div>
