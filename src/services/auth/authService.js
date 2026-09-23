@@ -23,3 +23,8 @@ export const logout = async () => {
     const response = await http.post("/auth/logout");
     return response.data;
 };
+
+export const checkExistsEmail = async (email) => {
+    const response = await http.get(`/auth/check-email?email=${email}`);
+    return response.data.exists;
+};

@@ -34,6 +34,12 @@ export default function Register() {
         }
     };
 
+    // Synchro checking email
+    const email = watch("email");
+    useEffect(() => {
+        if (email) trigger("email");
+    }, [email, trigger]);
+
     // Synchro checking password
     const password = watch("password");
 

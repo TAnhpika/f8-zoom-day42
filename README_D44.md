@@ -72,3 +72,17 @@ npm i yup @hookform/resolvers
 ### Synchro checking password
 
 - useEffect giúp gõ xong, render xong giao diện r mới kiểm tra thay vì kiểm tra và thực hiện logic trước khi render như dùng onChange, dễ gây block giao diện.
+
+### Form UX
+
+- Với các trang bán hàng: nên yêu cầu nhập số trường tối thiếu (Tên, sđt, địa chỉ.). Nhập nhiều, nản -> mất khách
+- Làm form tốt nhất là làm sao để người dùng gần như k nhập sai. Validate chỉ là phương án backup. Báo lỗi gây chú ý, ở đúng trường lỗi -> nhanh chóng sửa và vượt qua form đấy -> có khách hàng tiềm năng
+
+### Synchro checking exists email
+
+- báo sai định dạng nhưng k gọi API
+- đúng định dạng ms gửi api check
+- thường áp dụng cho các trường k đc trùng như username, email, sđt
+
+- Check 2 chữ sau dấu '.' là gọi API check nhưng nếu .com thì gọi 2 lần - phí 
+=> dùng debounce -> delay 600s mỗi lần gọi
