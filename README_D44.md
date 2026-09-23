@@ -75,8 +75,16 @@ npm i yup @hookform/resolvers
 
 ### Form UX
 
+- https://designlab.com/blog/form-ui-design-best-practices
+- Hiểu được hành vi người dùng -> tối ưu để user thực hiện dễ dàng hơn
+- 'tôi chưa nhập hết chứ có phải nhập sai đâu mà báo lỗi đỏ hết lên r' (-> debounce)
 - Với các trang bán hàng: nên yêu cầu nhập số trường tối thiếu (Tên, sđt, địa chỉ.). Nhập nhiều, nản -> mất khách
 - Làm form tốt nhất là làm sao để người dùng gần như k nhập sai. Validate chỉ là phương án backup. Báo lỗi gây chú ý, ở đúng trường lỗi -> nhanh chóng sửa và vượt qua form đấy -> có khách hàng tiềm năng
+- UI sẽ thao túng hành vi người dùng. để đăng ký bằng sđt để sale lên trên, dù có bất tiện
+- gộp thành 1 ô (fullname), khi cần thì tách (firstName, lastName) 
+- k thay label bằng placeholder
+- click xóa -> thay vì hiện modal confirm thì có nút hoàn tác (tiết kiệm click). 
+- Nếu những thứ quan trọng, 'xóa nhầm là chết' thì để nút confirm sang trái, ngc hướng, còn nút Cancel primary, mặc định active (vì user k đọc modal đâu). BE làm xóa mềm (cho vào thùng rác 30 ngày)
 
 ### Synchro checking exists email
 
@@ -84,5 +92,5 @@ npm i yup @hookform/resolvers
 - đúng định dạng ms gửi api check
 - thường áp dụng cho các trường k đc trùng như username, email, sđt
 
-- Check 2 chữ sau dấu '.' là gọi API check nhưng nếu .com thì gọi 2 lần - phí 
-=> dùng debounce -> delay 600s mỗi lần gọi
+- Check 2 chữ sau dấu '.' là gọi API check nhưng nếu .com thì gọi 2 lần - phí
+  => dùng debounce -> delay 600s mỗi lần gọi
