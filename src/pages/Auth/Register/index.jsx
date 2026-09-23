@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import * as authService from "@/services/auth";
 import { useNavigate } from "react-router";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerSchema } from "@/utils/validators";
+import { EMAIL_REGEX, registerSchema } from "@/utils/validators";
 import { useEffect } from "react";
 
 export default function Register() {
@@ -34,11 +34,21 @@ export default function Register() {
         }
     };
 
-    // Synchro checking email
+    // Synchro checking exist email
     const email = watch("email");
     useEffect(() => {
-        if (email) trigger("email");
-    }, [email, trigger]);
+        if (email && EMAIL_REGEX.test(email)) {
+            authService.checkExistsEmail(email).then((exists) => {
+                if (exists) {
+                    setError("email", {
+                        type: "check-email",
+                        message: "Email đã tồn tại, vui lòng chọn email khác",
+                    });
+                }
+            });
+            if (email) trigger("email");
+        }
+    }, [email, setError, trigger]);
 
     // Synchro checking password
     const password = watch("password");
