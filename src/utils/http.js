@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const baseURL = import.meta.env.VITE_BASE_API;
+
 export const httpClient = axios.create({
-    baseURL: import.meta.env.VITE_BASE_API,
+    baseURL,
 });
 
 httpClient.interceptors.request.use((config) => {
@@ -31,25 +33,35 @@ const processQueue = (error) => {
 // chủ yếu sửa path và name ở đây
 const refreshToken = async () => {
     try {
-        const result = await post("/auth/refresh-token", {
+        const result = await axios.post(`${baseURL}/auth/refresh-token`, {
             refresh_token: localStorage.getItem("refreshToken"),
         });
         localStorage.setItem("accessToken", result.data.access_token);
         localStorage.setItem("refreshToken", result.data.refresh_token);
 
         processQueue(null);
+        console.log("end queue");
     } catch (error) {
+        console.log("throw error");
+
         processQueue(error);
         throw error;
     }
 };
 
 const getNewToken = async () => {
+    console.log(isRefreshing);
+
     if (!isRefreshing) {
         isRefreshing = true;
+        console.log("start");
+
         await refreshToken();
+        console.log("end");
         isRefreshing = false;
         return;
+    } else {
+        console.log("Refresh fail");
     }
 
     // Return a promise that resolves with the new token
@@ -69,9 +81,16 @@ httpClient.interceptors.response.use(
         if (shouldRenewToken) {
             originalRequest._retry = true;
             try {
+                console.log("getNewToken");
                 await getNewToken();
-                return httpClient(originalRequest);
+
+                console.log("reTry");
+                const response = httpClient(originalRequest);
+                console.log("Success");
+                return response;
             } catch (error) {
+                console.log("Error");
+
                 return Promise.reject(error);
             }
         }

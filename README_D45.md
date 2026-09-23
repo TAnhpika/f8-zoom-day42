@@ -40,7 +40,7 @@
 ### Code splitting vs lazy load
 
 - Code splitting: chia nhỏ code, khi user đến trang / component cần dùng thì mới tải trang đó
-- Lazy load: đến nơi dùng nó mới đc tải 
+- Lazy load: đến nơi dùng nó mới đc tải
 - Nhưng lại đi cùng nhau. Vì chia nhỏ mà tải luôn 1 lần thì đâu ý nghĩa
 - Còn lazy load trong 1 trang thì vite cấu hình tự động sinh ra
 - Load more (Button click -> load)
@@ -53,13 +53,21 @@
 - Nếu page / component đó có vài KB thì có nên tách k
 
 => Tách page nặng + k cần hiển thị ngay
+
 ## Lưu ý
-- Khi dùng lazy load + Error Boundaries sẽ lỗi 
+
+- Khi dùng lazy load + Error Boundaries sẽ lỗi
 - Cần dùng Suspense: khi import bất đồng bộ (lazy) - trả về 1 Promise ở pending, khi user vào thì mới result
-- Khi mạng lag thì page lazy sẽ load lâu, khi click vào sẽ k có UI -> cần set loading. Nhưng state k dùng ở route 
-=> Dùng Suspense
+- Khi mạng lag thì page lazy sẽ load lâu, khi click vào sẽ k có UI -> cần set loading. Nhưng state k dùng ở route
+  => Dùng Suspense
 
 ## Suspense
 
 - Bọc page đc tách ra. Khi đang tải giúp hiện loading chứ k trắng trang
 - Cách dùng: Bọc App với Suspense kèm fallback chứa component Loading
+
+---
+
+# Lỗi đệ quy refresh token
+
+- dùng cùng instant gọi interceptors. Khi refresh token lỗi lại gọi Interceptors -> tách ra khỏi instant, thay bằng Axios

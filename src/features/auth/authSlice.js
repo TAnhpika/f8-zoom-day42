@@ -18,6 +18,8 @@ export const authSlice = createSlice({
             state.currentUser = action.payload;
         });
         builder.addCase(getCurrentUser.rejected, (state) => {
+            console.log("rejected   ");
+            
             state.currentUser = null;
         });
     },
