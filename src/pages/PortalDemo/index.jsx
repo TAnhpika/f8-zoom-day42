@@ -1,6 +1,9 @@
 import Modal from "@/components/Modal";
+import { useState } from "react";
 
 export default function PortalDemo() {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <div>
             <h1>Portal demo</h1>
@@ -11,12 +14,23 @@ export default function PortalDemo() {
                         height: 100,
                         transform: "scale(1.1)",
                     }}
-                    // onClick={() => {
-                    //     alert("Clicker");
-                    // }}
                 >
                     <div>
-                        <Modal isOpen>Modal Content</Modal>
+                        <Modal
+                            isOpen={isOpen}
+                            onRequestClose={() => {
+                                setIsOpen(false);
+                            }}
+                        >
+                            Modal Content
+                        </Modal>
+                        <button
+                            onClick={() => {
+                                setIsOpen(true);
+                            }}
+                        >
+                            Open
+                        </button>
                     </div>
                 </div>
             </div>

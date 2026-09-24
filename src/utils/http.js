@@ -36,28 +36,21 @@ const refreshToken = async () => {
         const result = await axios.post(`${baseURL}/auth/refresh-token`, {
             refresh_token: localStorage.getItem("refreshToken"),
         });
-        localStorage.setItem("accessToken", result.data.access_token);
-        localStorage.setItem("refreshToken", result.data.refresh_token);
+        localStorage.setItem("accessToken", result.data.data.access_token);
+        localStorage.setItem("refreshToken", result.data.data.refresh_token);
 
         processQueue(null);
-        console.log("end queue");
     } catch (error) {
-        console.log("throw error");
-
         processQueue(error);
         throw error;
     }
 };
 
 const getNewToken = async () => {
-    console.log(isRefreshing);
-
     if (!isRefreshing) {
         isRefreshing = true;
-        console.log("start");
 
         await refreshToken();
-        console.log("end");
         isRefreshing = false;
         return;
     } else {
@@ -81,16 +74,10 @@ httpClient.interceptors.response.use(
         if (shouldRenewToken) {
             originalRequest._retry = true;
             try {
-                console.log("getNewToken");
                 await getNewToken();
 
-                console.log("reTry");
-                const response = httpClient(originalRequest);
-                console.log("Success");
-                return response;
+                return httpClient(originalRequest);
             } catch (error) {
-                console.log("Error");
-
                 return Promise.reject(error);
             }
         }
