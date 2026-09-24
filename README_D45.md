@@ -87,3 +87,25 @@
 ## Giúp
 
 - vs modal, dialog: render ra sau root, trong body. K bị ảnh hưởng bởi transform
+
+---
+
+# useReducer
+
+- ít dùng
+- khác vs redux: useReducer dùng lun initValue chứ k gọi reducer lần đầu để set initValue.
+- case default của reducer trong useReducer có thể ném lỗi nhưng trong redux thì return state - initValue
+- ~ 1 custom hook của useState: dữ liệu trả ra đc dùng để setState -> re-render
+
+## Dùng
+
+- dùng cho trường hợp nhiều state. Vì trong code dự án có rất nhiều state -> có rất nhiều dòng code chứa useState nhưng k giấu đi đc - custom hook chỉ cho việc tái sử dụng logic
+  => useReducer tách reducer và các state ra file riêng
+
+## Thực tế
+
+- khá ít dùng, ứng dụng đc thì dùng
+- vì thực tế trong 1 component ai đi để nhiều state như vậy (10-20 state) -> phân chia hợp lý trong component thay vì nhét nhiều state r đi dùng useReducer
+  -> dùng RTK
+
+- dự án 80-90% dùng RTK / Zustand (ngắn, thiết kế gần con người hơn, k cần đào sâu)

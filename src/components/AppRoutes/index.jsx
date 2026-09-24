@@ -22,6 +22,7 @@ import AuthProvider from "@/components/AuthProvider";
 import PrivateRoute from "@/components/PrivateRoute";
 
 import { httpClient } from "@/utils/http";
+import UseReducer from "@/pages/UseReducer";
 
 export default function AppRoutes() {
     useEffect(() => {
@@ -36,6 +37,8 @@ export default function AppRoutes() {
                 <Route index element={<Home />} />
                 <Route path="/counter" element={<Counter />} />
                 <Route path="/portal-demo" element={<PortalDemo />} />
+                <Route path="/use-reducer" element={<UseReducer />} />
+
                 <Route path="/products" element={<ProductList />} />
                 <Route path="/address/provinces" element={<ProvincesList />} />
                 <Route
