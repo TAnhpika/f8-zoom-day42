@@ -52,7 +52,7 @@
 - Page nào liên quan đến tải đầu thì k nên dùng code splitting, lazy load nó (trang chủ / trang chi tiết sản phẩm đc click trực tiếp từ GG)
 - Nếu page / component đó có vài KB thì có nên tách k
 
-=> Tách page nặng + k cần hiển thị ngay
+=> Tách page nặng (50Kb trở lên) + k cần hiển thị ngay
 
 ## Lưu ý
 
@@ -71,3 +71,19 @@
 # Lỗi đệ quy refresh token
 
 - dùng cùng instant gọi interceptors. Khi refresh token lỗi lại gọi Interceptors -> tách ra khỏi instant, thay bằng Axios
+
+---
+
+# React portal
+
+- đứng ở A mở cửa ra là ở nơi B
+- https://react.dev/reference/react-dom/createPortal
+
+## Lý do dùng
+
+- nếu child dùng fixed mà ở parent dùng transform thì sẽ gây lỗi fixed
+- child nổi bọt ra parent (child click parent nghe)
+
+## Giúp
+
+- vs modal, dialog: render ra sau root, trong body. K bị ảnh hưởng bởi transform

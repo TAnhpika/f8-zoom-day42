@@ -1,7 +1,15 @@
 import PropTypes from "prop-types";
-import styles from "./Modal.module.scss";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import clsx from "clsx";
+import { createPortal } from "react-dom";
+
+import styles from "./Modal.module.scss";
+
+const modalRoot =
+    document.querySelector(".modal-root") || document.createElement("div");
+modalRoot.className = "modal-root";
+
+document.body.appendChild(modalRoot);
 
 const Modal = forwardRef(
     (
@@ -21,7 +29,7 @@ const Modal = forwardRef(
         const [isOpen, setIsOpen] = useState(_isOpen);
 
         useEffect(() => {
-            setIsOpen(_isOpen); 
+            setIsOpen(_isOpen);
         }, [_isOpen]);
 
         useImperativeHandle(
@@ -74,7 +82,7 @@ const Modal = forwardRef(
 
         if (!isOpen) return null;
 
-        return (
+        return createPortal(
             <div className={styles.modal}>
                 <div className={clsx(styles.content, className)}>
                     {/* Close button */}
@@ -96,7 +104,8 @@ const Modal = forwardRef(
                         if (shouldCloseOnOverlayClick) handleRequestClose();
                     }}
                 />
-            </div>
+            </div>,
+            modalRoot,
         );
     },
 );

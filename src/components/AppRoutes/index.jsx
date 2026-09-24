@@ -14,6 +14,7 @@ const ProvincesList = lazy(() => import("@/pages/Address/ProvincesList"));
 const ProvincesList2 = lazy(() => import("@/pages/Address/ProvincesList2"));
 const Register = lazy(() => import("@/pages/Auth/Register"));
 const Login = lazy(() => import("@/pages/Auth/Login"));
+const PortalDemo = lazy(() => import("@/pages/PortalDemo"));
 
 // Components
 import Header from "@/components/Header";
@@ -34,6 +35,7 @@ export default function AppRoutes() {
             <Routes>
                 <Route index element={<Home />} />
                 <Route path="/counter" element={<Counter />} />
+                <Route path="/portal-demo" element={<PortalDemo />} />
                 <Route path="/products" element={<ProductList />} />
                 <Route path="/address/provinces" element={<ProvincesList />} />
                 <Route
