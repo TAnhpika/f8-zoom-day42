@@ -21,6 +21,7 @@ const storage = storageModule.default ?? storageModule;
 const persistConfig = {
     key: "root",
     storage,
+    blacklist: [productSlice.reducerPath],
 };
 
 const store = configureStore({

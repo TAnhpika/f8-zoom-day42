@@ -4,23 +4,29 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     list: [],
     loading: false,
+    hasMore: true,
 };
 
 export const productSlice = createSlice({
     name: "product",
     initialState,
-    reducers: {
-        setList: (state, action) => {
-            state.list = action.payload;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(getList.pending, (state) => {
                 state.loading = true;
             })
             .addCase(getList.fulfilled, (state, action) => {
-                state.list = action.payload.items;
+                const items = action.payload.items || [];
+                const page = action.meta.arg.page;
+
+                if (page === 1) {
+                    state.list = items;
+                } else {
+                    state.list = [...state.list, ...items];
+                }
+
+                state.hasMore = items.length > 0;
                 state.loading = false;
             })
             .addCase(getList.rejected, (state) => {

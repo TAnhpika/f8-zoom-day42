@@ -109,3 +109,14 @@
   -> dùng RTK
 
 - dự án 80-90% dùng RTK / Zustand (ngắn, thiết kế gần con người hơn, k cần đào sâu)
+
+# Infinite load
+
+- createAsyncThunk chỉ cho truyền 1 tham số đầu, vì nó có xử lý tham số thứ 2. Nếu cần truyền 2 thì bọc lại bằng obj.
+- Đặt obj đầu là rỗng để né undefined lỗi k gọi API đc ({limit, page} = {})
+
+## react-intersection-observer
+
+- npm i react-intersection-observer
+- cho bik khi nào cta cuộn đến
+- Cần bảo lưu danh sách data cũ
