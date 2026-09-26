@@ -3,6 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 
 import { persistReducer, persistStore } from "redux-persist";
 import storageModule from "redux-persist/lib/storage";
+import { encryptTransform } from "redux-persist-transform-encrypt";
 
 import { counterSlice } from "@/features/counter";
 import { productSlice } from "@/features/product";
@@ -11,16 +12,27 @@ import { authSlice } from "@/features/auth/authSlice";
 
 const storage = storageModule.default ?? storageModule;
 
+const transforms = import.meta.env.DEV ? [] : [
+    encryptTransform({
+        [atob("c2VjcmV0S2V5")]: "my-super-secret-key",
+        onError: function (error) {
+            console.error(error);
+        },
+    }),
+];
+
 const persistConfig = {
     key: "root",
     storage,
     blacklist: [authSlice.reducerPath, productSlice.reducerPath],
+    transforms,
 };
 
 const authPersistConfig = {
     key: authSlice.reducerPath,
     storage: storage,
     blacklist: ["fetching"],
+    transforms,
 };
 
 const rootReducer = combineReducers({
