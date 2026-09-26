@@ -14,7 +14,7 @@ const storage = storageModule.default ?? storageModule;
 
 const transforms = import.meta.env.DEV ? [] : [
     encryptTransform({
-        [atob("c2VjcmV0S2V5")]: "my-super-secret-key",
+        secretKey: "my-super-secret-key",
         onError: function (error) {
             console.error(error);
         },
