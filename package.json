@@ -21,6 +21,7 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-hook-form": "^7.88.0",
+    "react-infinite-scroll-component": "^7.2.1",
     "react-intersection-observer": "^11.0.1",
     "react-redux": "^9.3.0",
     "react-router": "^8.4.0",
