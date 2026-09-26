@@ -9,20 +9,29 @@ import { productSlice } from "@/features/product";
 import { addressApi } from "@/features/address/addressSlice";
 import { authSlice } from "@/features/auth/authSlice";
 
-const rootReducer = combineReducers({
-    [authSlice.reducerPath]: authSlice.reducer,
-    [counterSlice.reducerPath]: counterSlice.reducer,
-    [productSlice.reducerPath]: productSlice.reducer,
-    [addressApi.reducerPath]: addressApi.reducer,
-});
-
 const storage = storageModule.default ?? storageModule;
 
 const persistConfig = {
     key: "root",
     storage,
-    blacklist: [productSlice.reducerPath],
+    blacklist: [authSlice.reducerPath, productSlice.reducerPath],
 };
+
+const authPersistConfig = {
+    key: authSlice.reducerPath,
+    storage: storage,
+    blacklist: ["fetching"],
+};
+
+const rootReducer = combineReducers({
+    [authSlice.reducerPath]: persistReducer(
+        authPersistConfig,
+        authSlice.reducer,
+    ),
+    [counterSlice.reducerPath]: counterSlice.reducer,
+    [productSlice.reducerPath]: productSlice.reducer,
+    [addressApi.reducerPath]: addressApi.reducer,
+});
 
 const store = configureStore({
     reducer: persistReducer(persistConfig, rootReducer),

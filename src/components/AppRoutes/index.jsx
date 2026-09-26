@@ -1,4 +1,4 @@
-import { lazy, useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router";
 
 // K lazy load
@@ -33,29 +33,34 @@ export default function AppRoutes() {
         <HashRouter>
             <AuthProvider />
             <Header />
-            <Routes>
-                <Route index element={<Home />} />
-                <Route path="/counter" element={<Counter />} />
-                <Route path="/portal-demo" element={<PortalDemo />} />
-                <Route path="/use-reducer" element={<UseReducer />} />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                    <Route index element={<Home />} />
+                    <Route path="/counter" element={<Counter />} />
+                    <Route path="/portal-demo" element={<PortalDemo />} />
+                    <Route path="/use-reducer" element={<UseReducer />} />
 
-                <Route path="/products" element={<ProductList />} />
-                <Route path="/address/provinces" element={<ProvincesList />} />
-                <Route
-                    path="/address/provinces2"
-                    element={<ProvincesList2 />}
-                />
+                    <Route path="/products" element={<ProductList />} />
+                    <Route
+                        path="/address/provinces"
+                        element={<ProvincesList />}
+                    />
+                    <Route
+                        path="/address/provinces2"
+                        element={<ProvincesList2 />}
+                    />
 
-                <Route path="/assets" element={<DemoAssets />} />
-                <Route path="/icons" element={<Icons />} />
+                    <Route path="/assets" element={<DemoAssets />} />
+                    <Route path="/icons" element={<Icons />} />
 
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
 
-                <Route element={<PrivateRoute />}>
-                    <Route path="/profile" element={<Profile />} />
-                </Route>
-            </Routes>
+                    <Route element={<PrivateRoute />}>
+                        <Route path="/profile" element={<Profile />} />
+                    </Route>
+                </Routes>
+            </Suspense>
         </HashRouter>
     );
 }

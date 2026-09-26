@@ -42,6 +42,8 @@ const refreshToken = async () => {
         processQueue(null);
     } catch (error) {
         processQueue(error);
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
         throw error;
     }
 };
@@ -50,8 +52,11 @@ const getNewToken = async () => {
     if (!isRefreshing) {
         isRefreshing = true;
 
-        await refreshToken();
-        isRefreshing = false;
+        try {
+            await refreshToken();
+        } finally {
+            isRefreshing = false;
+        }
         return;
     } else {
         console.log("Refresh fail");
