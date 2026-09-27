@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getList } from "@/services/product";
 import { useInView } from "react-intersection-observer";
 import { Helmet } from "react-helmet";
+import { motion } from "motion/react";
 
 export default function ProductList() {
     const dispatch = useDispatch();
@@ -38,8 +39,16 @@ export default function ProductList() {
                     content="Description of products list"
                 />
             </Helmet>
-            
-            <h1>Product List</h1>
+
+            <motion.h1
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { duration: 2 }}}
+                whileHover={{ x: 50 }}
+                whileTap={{ scale: 0.95 }}
+                onHoverStart={() => console.log("hover started!")}
+            >
+                Product List
+            </motion.h1>
 
             <ul>
                 {products.map((product) => (
@@ -56,7 +65,18 @@ export default function ProductList() {
                 </div>
             )}
 
-            {!hasMore && <p>Đã hết danh sách</p>}
+            {!hasMore && (
+                <motion.p
+                    initial={{ backgroundColor: "rgb(0, 255, 0)", opacity: 0 }}
+                    whileInView={{
+                        backgroundColor: "rgb(255, 0, 255)",
+                        opacity: 1,
+                        transition: { duration: 2 },
+                    }}
+                >
+                    Đã hết danh sách
+                </motion.p>
+            )}
         </>
     );
 }

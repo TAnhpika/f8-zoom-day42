@@ -56,4 +56,10 @@ Vấn đề: khi danh sách ngắn, chưa lấp đầy màn hình thì k tự đ
 
 - npm i react-helmet
 - Vào mỗi page con tự chuyển title, meta, description tương ứng
-- Cần dùng chung vs prerender 
+- Cần dùng chung vs prerender
+
+# Motion
+
+- lib làm Animation
+- dùng nơi cần dùng, k lạm dụng
+- npm i motion
