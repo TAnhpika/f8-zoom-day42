@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { HashRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 
 // K lazy load
 import Home from "@/pages/Home";
@@ -30,7 +30,7 @@ export default function AppRoutes() {
     }, []);
 
     return (
-        <HashRouter>
+        <BrowserRouter>
             <AuthProvider />
             <Header />
             <Suspense fallback={<div>Loading...</div>}>
@@ -61,6 +61,6 @@ export default function AppRoutes() {
                     </Route>
                 </Routes>
             </Suspense>
-        </HashRouter>
+        </BrowserRouter>
     );
 }

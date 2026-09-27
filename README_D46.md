@@ -19,5 +19,41 @@
 
 npm i react-infinite-scroll-component
 
-
 Vấn đề: khi danh sách ngắn, chưa lấp đầy màn hình thì k tự động tải đc
+
+# SEO trong React
+
+- Search Engine Optimization
+- Thực tế: giờ SEO k quan trọng lắm vì giờ search toàn ra kết quả của AI, mà còn đúng nữa. Chắc hiệu quả 1 chút trong khâu bán hàng
+- crawler: bot của công cụ tìm kiếm quét IP, danh sách domain để hiện ra các website đang hoạt động -> request vào domain trang -> đọc code HTML (để tìm ra thẻ a, lập ra danh sách các thẻ a như 1 mạng nhện) -> spider: bò trên mạng nhện ấy để thu thập thông tin
+
+## vấn đề:
+
+- khi truy cập curl https://f8.edu.vn/ ~ view page source. Con bot chỉ thấy 1 root rỗng, phân tích xong k hiểu gì cả
+- nếu muốn tối ưu SEO thì dự án mới dùng NextJS / dùng Server-side rendering luôn (Server-side rendering tải 1 lần, trả về full thông tin)
+
+## FLow giải quyết
+
+1. Search engine bots -> F8 (React) -> root trống -> K tối ưu SEO
+2. Search engine bots -> F8 (React) -> pre-render server (máy chủ trung gian giúp bật 1 trình duyệt, mở F8, chờ render xong) -> trả đủ HTML -> Tối ưu SEO
+
+## Prerender
+
+- npm i prerender
+- dùng Headless browser (browser k giao diện) Vd: Headless Chrome
+- trả về full ở http://localhost:3000/http://localhost:5173/products
+- cần cấu hình để khi bots vào sẽ truy cập prerender server (còn người thật sẽ vào React). Nhưng sẽ chậm hơn bth: do trình duyệt cần bật lên và render. Khi học BE sẽ caching đc -> nhanh
+- demo ở D:\Desktop\Workspace\F8_Pro\Fullstack_Pro\ReactJs\D46\prerender-server
+
+## SEOquake
+
+- giúp tối ưu SEO on page
+- robots.txt: hướng dẫn cho bots nên / k truy cập vào đâu
+- https://developers.google.com/crawling/docs/robots-txt/create-robots-txt
+- https://www.xml-sitemaps.com/
+
+### React helmet
+
+- npm i react-helmet
+- Vào mỗi page con tự chuyển title, meta, description tương ứng
+- Cần dùng chung vs prerender 

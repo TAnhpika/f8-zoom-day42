@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getList } from "@/services/product";
 import { useInView } from "react-intersection-observer";
+import { Helmet } from "react-helmet";
 
 export default function ProductList() {
     const dispatch = useDispatch();
@@ -30,6 +31,14 @@ export default function ProductList() {
 
     return (
         <>
+            <Helmet>
+                <title>Products List</title>
+                <meta
+                    name="description"
+                    content="Description of products list"
+                />
+            </Helmet>
+            
             <h1>Product List</h1>
 
             <ul>
@@ -39,7 +48,10 @@ export default function ProductList() {
             </ul>
 
             {hasMore && (
-                <div ref={ref} style={{ padding: "10px 0", textAlign: "center" }}>
+                <div
+                    ref={ref}
+                    style={{ padding: "10px 0", textAlign: "center" }}
+                >
                     {loading && <div>Đang tải...</div>}
                 </div>
             )}
