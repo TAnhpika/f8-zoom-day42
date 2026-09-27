@@ -45,6 +45,14 @@ Vấn đề: khi danh sách ngắn, chưa lấp đầy màn hình thì k tự đ
 - cần cấu hình để khi bots vào sẽ truy cập prerender server (còn người thật sẽ vào React). Nhưng sẽ chậm hơn bth: do trình duyệt cần bật lên và render. Khi học BE sẽ caching đc -> nhanh
 - demo ở D:\Desktop\Workspace\F8_Pro\Fullstack_Pro\ReactJs\D46\prerender-server
 
+const prerender = require("prerender");
+const server = prerender({
+chromeLocation: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+});
+server.start();
+
+- Run bằng: node index.js
+
 ## SEOquake
 
 - giúp tối ưu SEO on page
@@ -63,3 +71,13 @@ Vấn đề: khi danh sách ngắn, chưa lấp đầy màn hình thì k tự đ
 - lib làm Animation
 - dùng nơi cần dùng, k lạm dụng
 - npm i motion
+
+## dangerouslySetInnerHTML + DOMPurify
+
+- ~ innerHtml trong React 
+- Giúp: đưa chuỗi HTML từ API ra giao diện
+- 1 bài viết sẽ đc chuyển về html, dù có về markdown thì sau đó cx về html
+- server trả về API dạng chuỗi html
+- Nhược điểm: dính XSS như thường
+=> Phải dùng chung vs dompurify để bỏ những đoạn html nguy hiểm
+- npm i dompurify

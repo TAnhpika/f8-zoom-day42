@@ -1,9 +1,13 @@
 import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-// K lazy load
-import Home from "@/pages/Home";
-import Profile from "@/pages/Profile";
+// Components
+import Header from "@/components/Header";
+import AuthProvider from "@/components/AuthProvider";
+import PrivateRoute from "@/components/PrivateRoute";
+
+// Util
+import { httpClient } from "@/utils/http";
 
 // pages lazy load
 const Counter = lazy(() => import("@/pages/Counter"));
@@ -16,13 +20,12 @@ const Register = lazy(() => import("@/pages/Auth/Register"));
 const Login = lazy(() => import("@/pages/Auth/Login"));
 const PortalDemo = lazy(() => import("@/pages/PortalDemo"));
 
-// Components
-import Header from "@/components/Header";
-import AuthProvider from "@/components/AuthProvider";
-import PrivateRoute from "@/components/PrivateRoute";
 
-import { httpClient } from "@/utils/http";
+// K lazy load
+import Home from "@/pages/Home";
+import Profile from "@/pages/Profile";
 import UseReducer from "@/pages/UseReducer";
+import PostDetail from "@/pages/PostDetail";
 
 export default function AppRoutes() {
     useEffect(() => {
@@ -39,6 +42,7 @@ export default function AppRoutes() {
                     <Route path="/counter" element={<Counter />} />
                     <Route path="/portal-demo" element={<PortalDemo />} />
                     <Route path="/use-reducer" element={<UseReducer />} />
+                    <Route path="/post-detail" element={<PostDetail />} />
 
                     <Route path="/products" element={<ProductList />} />
                     <Route
