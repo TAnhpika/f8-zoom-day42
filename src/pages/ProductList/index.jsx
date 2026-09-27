@@ -2,7 +2,7 @@ import { useProductLoading, useProductList } from "@/features/product";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getList } from "@/services/product";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { useInView } from "react-intersection-observer";
 
 export default function ProductList() {
     const dispatch = useDispatch();
@@ -12,31 +12,39 @@ export default function ProductList() {
     const loading = useProductLoading();
     const hasMore = useSelector((state) => state.product.hasMore);
 
+    const { ref, inView } = useInView({
+        threshold: 0,
+        rootMargin: "200px",
+    });
+
     useEffect(() => {
-        dispatch(getList({ limit: 10, page }));
+        dispatch(getList({ limit: 20, page }));
     }, [dispatch, page]);
+
+    useEffect(() => {
+        if (inView && !loading && hasMore) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setPage((currentPage) => currentPage + 1);
+        }
+    }, [inView, loading, hasMore]);
 
     return (
         <>
             <h1>Product List</h1>
 
-            <InfiniteScroll
-                dataLength={products.length}
-                next={() => {
-                    if (!loading && hasMore) {
-                        setPage((currentPage) => currentPage + 1);
-                    }
-                }}
-                hasMore={hasMore}
-                loader={<div>Đang tải...</div>}
-                endMessage={<p>Đã hết danh sách</p>}
-            >
-                <ul>
-                    {products.map((product) => (
-                        <li key={product.id}>{product.title}</li>
-                    ))}
-                </ul>
-            </InfiniteScroll>
+            <ul>
+                {products.map((product) => (
+                    <li key={product.id}>{product.title}</li>
+                ))}
+            </ul>
+
+            {hasMore && (
+                <div ref={ref} style={{ padding: "10px 0", textAlign: "center" }}>
+                    {loading && <div>Đang tải...</div>}
+                </div>
+            )}
+
+            {!hasMore && <p>Đã hết danh sách</p>}
         </>
     );
 }

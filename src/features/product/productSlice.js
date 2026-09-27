@@ -17,7 +17,7 @@ export const productSlice = createSlice({
                 state.loading = true;
             })
             .addCase(getList.fulfilled, (state, action) => {
-                const items = action.payload.items || [];
+                const items = action.payload?.items || action.payload?.data?.items || [];
                 const page = action.meta.arg.page;
 
                 if (page === 1) {

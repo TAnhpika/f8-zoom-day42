@@ -18,3 +18,6 @@
 # Infinite Scroll Component
 
 npm i react-infinite-scroll-component
+
+
+Vấn đề: khi danh sách ngắn, chưa lấp đầy màn hình thì k tự động tải đc
