@@ -15,11 +15,15 @@
 - dùng thêm btoa trick lỏ. Cách chính bên BE yêu cầu trình duyệt lưu dạng httpOnlyCookie - k set/get đc = JS (tránh XSS).
 - Còn cái gì dính đến tiền mới áp dụng thêm (k tự mã hóa chính mình)
 
+---
+
 # Infinite Scroll Component
 
 npm i react-infinite-scroll-component
 
 Vấn đề: khi danh sách ngắn, chưa lấp đầy màn hình thì k tự động tải đc
+
+---
 
 # SEO trong React
 
@@ -66,18 +70,40 @@ server.start();
 - Vào mỗi page con tự chuyển title, meta, description tương ứng
 - Cần dùng chung vs prerender
 
+---
+
 # Motion
 
 - lib làm Animation
 - dùng nơi cần dùng, k lạm dụng
 - npm i motion
 
-## dangerouslySetInnerHTML + DOMPurify
+---
 
-- ~ innerHtml trong React 
+# dangerouslySetInnerHTML + DOMPurify
+
+- ~ innerHtml trong React
 - Giúp: đưa chuỗi HTML từ API ra giao diện
 - 1 bài viết sẽ đc chuyển về html, dù có về markdown thì sau đó cx về html
 - server trả về API dạng chuỗi html
 - Nhược điểm: dính XSS như thường
-=> Phải dùng chung vs dompurify để bỏ những đoạn html nguy hiểm
+  => Phải dùng chung vs dompurify để bỏ những đoạn html nguy hiểm
 - npm i dompurify
+
+---
+
+# Menu tự động
+
+- tạo menu với những heading trong bài post
+- 1 biến trùng tên thẻ mà chữ đầu viết hoa thì đó là 1 Component (Vd: Button, Tag,...)
+
+## slugify
+
+- npm i slugify
+- giúp chuyển title thành slug trên url
+- có id cho heading để trùng vs slug href ở thẻ a để có thể nhảy tới
+
+- vấn đề: 
++ khi share cho bạn bè thì id đã bị gán trc đó nên k nhảy tới đoạn mik muốn share đc 
++ khi click vào heading trong bài viết cx cần gán lên url để share
++ cuộn đến phần nào thì active phần tương ứng

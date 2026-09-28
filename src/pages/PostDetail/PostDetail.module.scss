@@ -1,0 +1,57 @@
+html {
+    scroll-behavior: smooth;
+}
+a {
+    text-decoration: none;
+    color: #1499c5;
+}
+.container {
+    background: #e7dede;
+    padding: 20px;
+
+    .inner {
+        display: flex;
+        gap: 20px;
+
+        .content {
+            margin-right: 320px;
+            overflow: hidden;
+        }
+    }
+}
+
+.index {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 230px;
+    flex-shrink: 0;
+
+    a {
+        color: #333;
+        font-size: 13px;
+
+        &:hover {
+            cursor: pointer;
+            color: #f62682;
+        }
+    }
+
+    h2,
+    h3,
+    h4 {
+        margin: 0;
+
+        &:active {
+            color: #1499c5;
+        }
+    }
+
+    h3 {
+        padding-left: 20px;
+    }
+
+    h4 {
+        padding-left: 40px;
+    }
+}
