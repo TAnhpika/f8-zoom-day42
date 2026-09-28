@@ -3,7 +3,7 @@ import DOMPurify from "dompurify";
 import slugify from "slugify";
 
 import fakeData from "./fakeData";
-import css from "./PostDetail.module.scss";
+import styles from "./PostDetail.module.scss";
 import { useLocation } from "react-router";
 
 export default function PostDetail() {
@@ -13,6 +13,27 @@ export default function PostDetail() {
 
     useEffect(() => {
         if (!fakeData) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // gỡ active trc khi gán mới
+                    const oldActive = document.querySelector(
+                        `#index-list a.${styles.active}`,
+                    );
+                    if (oldActive) {
+                        oldActive.classList.remove(styles.active);
+                    }
+
+                    const indexTarget = document.querySelector(
+                        `#index-list a[href="#${entry.target.id}"]`,
+                    );
+                    if (indexTarget) {
+                        indexTarget.classList.add(styles.active);
+                    }
+                }
+            });
+        });
 
         const indexList = [];
         const headings =
@@ -36,6 +57,8 @@ export default function PostDetail() {
             heading.innerHTML = "";
             heading.appendChild(link);
 
+            observer.observe(heading);
+
             indexList.push(
                 <Tag key={index} className={Tag}>
                     <a href={`#${slug}`}>{originalText}</a>
@@ -45,6 +68,10 @@ export default function PostDetail() {
 
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setIndexList(indexList);
+
+        return () => {
+            observer.disconnect();
+        };
         // thực tế khi gọi API cần điền để update menu theo
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fakeData]);
@@ -59,13 +86,13 @@ export default function PostDetail() {
     }, [indexList.length, location.hash]);
 
     return (
-        <div className={css.container}>
+        <div className={styles.container}>
             <h1>Post detail</h1>
-            <div className={css.inner}>
+            <div className={styles.inner}>
                 {/* Content */}
                 <div
                     ref={contentRef}
-                    className={css.content}
+                    className={styles.content}
                     dangerouslySetInnerHTML={{
                         // __html: fakeData
                         __html: DOMPurify.sanitize(fakeData),
@@ -74,7 +101,9 @@ export default function PostDetail() {
 
                 {/* Index */}
                 {indexList.length && (
-                    <div className={css.index}>{indexList}</div>
+                    <div id="index-list" className={styles.index}>
+                        {indexList}
+                    </div>
                 )}
             </div>
         </div>

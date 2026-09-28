@@ -103,7 +103,8 @@ server.start();
 - giúp chuyển title thành slug trên url
 - có id cho heading để trùng vs slug href ở thẻ a để có thể nhảy tới
 
-- vấn đề: 
-+ khi share cho bạn bè thì id đã bị gán trc đó nên k nhảy tới đoạn mik muốn share đc 
-+ khi click vào heading trong bài viết cx cần gán lên url để share
-+ cuộn đến phần nào thì active phần tương ứng
+## Tính năng:
+
+* khi share cho bạn bè thì id đã bị gán trc đó có thể nhảy tới đoạn mik muốn share đc
+* khi click vào heading trong bài viết cx cần gán lên url để share
+* cuộn đến phần nào thì active phần tương ứng
